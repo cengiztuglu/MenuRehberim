@@ -13,8 +13,18 @@ import Login from './pages/Login/Login'
 function App() {
   return (
     <div>
-     <Login/>
-    </div>
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/menu" element={<Menu />} />
+      <Route path="/delivery" element={<Delivery />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/contact" element={<Login />} />
+
+    </Routes>
+    <Footer />
+  </div>
   );
 }
 

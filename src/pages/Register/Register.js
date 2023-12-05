@@ -1,27 +1,44 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const LoginForm = () => {
+const RegisterForm = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
 
-    if (username === 'user' && password === 'password') {
+    // Kayıt işlemi genellikle sunucuya istek yaparak gerçekleştirilir.
+    // Örnek olarak burada basit bir kontrol yapılıyor.
+    if (firstName && lastName && username && password && email) {
       setError('');
-      alert('Başarıyla giriş yaptınız!');
-      // Giriş başarılıysa başka bir sayfaya yönlendirme yapılabilir.
+      alert('Başarıyla kayıt oldunuz!');
+      // Kayıt başarılıysa başka bir sayfaya yönlendirme yapılabilir.
     } else {
-      setError('Kullanıcı adı veya şifre yanlış.');
+      setError('Lütfen tüm alanları doldurun.');
     }
   };
 
   return (
     <Container>
-      <Form onSubmit={handleLogin}>
-        <Title>Login</Title>
+      <Form onSubmit={handleRegister}>
+        <Title>Register</Title>
+        <Input
+          type="text"
+          placeholder="Ad"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <Input
+          type="text"
+          placeholder="Soyad"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
         <Input
           type="text"
           placeholder="Kullanıcı Adı"
@@ -29,19 +46,24 @@ const LoginForm = () => {
           onChange={(e) => setUsername(e.target.value)}
         />
         <Input
+          type="email"
+          placeholder="E-posta Adresi"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
           type="password"
           placeholder="Şifre"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit">Giriş Yap</Button>
+        <Button type="submit">Kayıt Ol</Button>
         {error && <Error>{error}</Error>}
       </Form>
     </Container>
   );
 };
 
-// Styled Components
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -93,4 +115,4 @@ const Error = styled.p`
   margin-top: 8px;
 `;
 
-export default LoginForm;
+export default RegisterForm;
