@@ -8,19 +8,12 @@ import Contact from './pages/Contact/Contact'
 
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
+import Login from './pages/Login/Login'
 
 function App() {
   return (
     <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/delivery" element={<Delivery />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
-      <Footer />
+     <Login/>
     </div>
   );
 }
