@@ -9,6 +9,8 @@ import Contact from './pages/Contact/Contact'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Login from './pages/Login/Login'
+import Register from './pages/Register/Register'
+
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
       <Route path="/delivery" element={<Delivery />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/contact" element={<Login />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
 
     </Routes>
     <Footer />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -37,15 +38,16 @@ const LoginForm = () => {
         <Button type="submit">Giriş Yap</Button>
         {error && <Error>{error}</Error>}
       </Form>
+      <RegisterLink to="/register">Hesabınız yok mu? Şimdi kayıt olun.</RegisterLink>
     </Container>
   );
 };
 
-// Styled Components
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   background-color: #f5f5f5;
 `;
@@ -91,6 +93,17 @@ const Button = styled.button`
 const Error = styled.p`
   color: red;
   margin-top: 8px;
+`;
+
+const RegisterLink = styled(Link)`
+  margin-top: 16px;
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #0056b3;
+  }
 `;
 
 export default LoginForm;
