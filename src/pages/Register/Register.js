@@ -1,63 +1,90 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const RegisterForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  const [user,setUser]=useState({
+    name:'',
+    surname:'',
+    email:'',
+    username:'',
+    password:''
+  });
 
-  const handleRegister = (e) => {
-    e.preventDefault();
+ 
+  const [error, setError] = useState(null);
 
-    // Kayıt işlemi genellikle sunucuya istek yaparak gerçekleştirilir.
-    // Örnek olarak burada basit bir kontrol yapılıyor.
-    if (firstName && lastName && username && password && email) {
+  const handleInputChange=(event)=>{
+    const{name,value}=event.target;
+    setUser({...user,[name]:value});
+  }
+
+  const handleRegister = () => {
+    if (user.name && user.surname && user.username && user.email && user.password) {
       setError('');
+      axios.post('http://localhost:8080/api/user',user)
+    .then(response=>
+      {
+        if(response.data===true){
+          console.error("Kayıt Başarılı");
+          
+        }
+        else{
+          console.error("kayıtta patladı");
+        }
+
+      }).catch(error=>{console.error("bende patladı");})
       alert('Başarıyla kayıt oldunuz!');
       // Kayıt başarılıysa başka bir sayfaya yönlendirme yapılabilir.
     } else {
       setError('Lütfen tüm alanları doldurun.');
     }
+    
+    // Kayıt işlemi genellikle sunucuya istek yaparak gerçekleştirilir.
+    // Örnek olarak burada basit bir kontrol yapılıyor.
+    
   };
 
   return (
     <Container>
-      <Form onSubmit={handleRegister}>
+      <Form onSubmit={handleRegister} >
         <Title>Register</Title>
         <Input
           type="text"
+          name='name'
           placeholder="Ad"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          value={user.name}
+          onChange={handleInputChange}
         />
         <Input
           type="text"
+          name='surname'
           placeholder="Soyad"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          value={user.surname}
+          onChange={handleInputChange}
         />
         <Input
           type="text"
+          name='username'
           placeholder="Kullanıcı Adı"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={user.username}
+          onChange={handleInputChange}
         />
         <Input
+        name='email'
           type="email"
           placeholder="E-posta Adresi"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={user.email}
+          onChange={handleInputChange}
         />
         <Input
+        name='password'
           type="password"
           placeholder="Şifre"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={user.password}
+          onChange={handleInputChange}
         />
-        <Button type="submit">Kayıt Ol</Button>
+        <Button type='submit'>Kayıt Ol</Button>
         {error && <Error>{error}</Error>}
       </Form>
     </Container>
