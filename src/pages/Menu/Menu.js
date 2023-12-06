@@ -10,6 +10,7 @@ import Beverages from './Beverages/Beverages'
 const Menu = () => {
   return (
     <div>
+      
       <HeroImage
         bgImage={bgImage}
         heading={["Our ", <span>Menu</span>]}

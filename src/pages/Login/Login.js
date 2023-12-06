@@ -1,22 +1,41 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link,Navigate,useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const [user, setUser] = useState({ 
+    userName: '',
+    password: ''
+  });
+  const [error, setError] = useState(null);
 
-    if (username === 'user' && password === 'password') {
-      setError('');
-      alert('Başarıyla giriş yaptınız!');
-      // Giriş başarılıysa başka bir sayfaya yönlendirme yapılabilir.
-    } else {
-      setError('Kullanıcı adı veya şifre yanlış.');
-    }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    axios.post('http://localhost:8081/api/login', user)
+      .then(response => {
+        if (response.data === "Giriş başarılı!") {
+          console.log('Giriş başarılı!');
+          navigate('/menu')
+          // Başarılı giriş durumunda yapılacak işlemler burada gerçekleştirilebilir
+          // Örneğin, kullanıcıyı başka bir sayfaya yönlendirebilirsiniz
+        } else {
+          setError('Kullanıcı adı veya şifre hatalı.');
+        }
+      })
+      .catch(error => {
+        console.error('Giriş hatası:', error);
+        setError('Giriş sırasında bir hata oluştu. Lütfen tekrar deneyin.');
+      });
   };
 
   return (
@@ -25,20 +44,22 @@ const LoginForm = () => {
         <Title>Login</Title>
         <Input
           type="text"
+          name='userName'
           placeholder="Kullanıcı Adı"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={user.userName}
+          onChange={handleInputChange}
         />
         <Input
           type="password"
           placeholder="Şifre"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name='password'
+          value={user.password}
+          onChange={handleInputChange}
         />
         <Button type="submit">Giriş Yap</Button>
         {error && <Error>{error}</Error>}
       </Form>
-      <RegisterLink to="/register">Hesabınız yok mu? Şimdii kayıt olun.</RegisterLink>
+      <RegisterLink to="/register">Hesabınız yok mu? Şimdi kayıt olun.</RegisterLink>
     </Container>
   );
 };
