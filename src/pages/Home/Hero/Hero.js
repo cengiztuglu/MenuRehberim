@@ -10,7 +10,7 @@ const Hero = () => {
                 <span>Menu</span> <span className='special-word'>Rehberim</span>
             </h1>
 
-            <p className='text-white'>Menu Rehberim ile bütün menüler elinizn altında !</p>
+            <p className='text-white'>Menu Rehberim ile bütün menüler elinizin altında !</p>
 
             <p className='text-white'>
                 Güncel fiyatlar <span className='special-word'>tek bir yerde !</span>
