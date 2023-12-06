@@ -38,7 +38,7 @@ const LoginForm = () => {
         <Button type="submit">Giriş Yap</Button>
         {error && <Error>{error}</Error>}
       </Form>
-      <RegisterLink to="/register">Hesabınız yok mu? Şimdi kayıt olun.</RegisterLink>
+      <RegisterLink to="/register">Hesabınız yok mu? Şimdii kayıt olun.</RegisterLink>
     </Container>
   );
 };
