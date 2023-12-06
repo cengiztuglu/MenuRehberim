@@ -22,7 +22,7 @@ const RegisterForm = () => {
   const handleRegister = () => {
     if (user.name && user.surname && user.username && user.email && user.password) {
       setError('');
-      axios.post('http://localhost:8080/api/user',user)
+      axios.post('http://localhost:8081/api/user',user)
     .then(response=>
       {
         if(response.data===true){
