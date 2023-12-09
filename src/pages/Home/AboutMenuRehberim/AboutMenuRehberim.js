@@ -2,26 +2,20 @@ import React, { useState } from "react";
 
 import "./AboutMenuRehberim.css";
 
-import image1 from "../../../assets/burger.jpg";
-import image2 from "../../../assets/cheese.jpg";
-import image3 from "../../../assets/cake.jpg";
-import image4 from "../../../assets/coffee.jpg";
-import image5 from "../../../assets/pizza.jpeg";
+import image1 from "../../../assets/MenuRehberAdv01.jpeg";
+import image2 from "../../../assets/MenuRehberimAdv02.jpeg";
+import image3 from "../../../assets/MenuRehberimAvd03.jpeg";
 
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { BsFillStarFill } from "react-icons/bs";
-
 const AmazingMeal = () => {
   const [items] = useState([
     { id: 1, url: image1 },
     { id: 2, url: image2 },
     { id: 3, url: image3 },
-    { id: 4, url: image4 },
-    { id: 5, url: image5 },
   ]);
 
   const settings = {
@@ -76,44 +70,6 @@ const AmazingMeal = () => {
             <blockquote>
               Menu Rehberim kullanıcı deneyimini en üst düzeyde tutmayı amaçlar. İşletme ve müşterilerin tek bir platformda birleşmesini sağlar.
             </blockquote>
-          </div>
-        </div>
-
-        <div className="amazing-card-container">
-          <div className="amazing-card amazing-card-left">
-            <img src={image1} alt="burger" className="amazing-card-image" />
-
-            <div className="amazing-card-content">
-              <div className="amazing-card-title">
-                <BsFillStarFill color="#c3512f" />
-                <h3 className="heading-tertiary">
-                  the best <span>ingredients</span>
-                </h3>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                commodo ligula eget dolor.
-              </p>
-            </div>
-          </div>
-
-          <div className="amazing-card amazing-card-right">
-            <img src={image2} alt="cheese" className="amazing-card-image" />
-
-            <div className="amazing-card-content">
-              <div className="amazing-card-title">
-                <BsFillStarFill color="#c3512f" />
-                <h3 className="heading-tertiary">
-                  <span>reservations</span>
-                </h3>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                commodo ligula eget dolor.
-              </p>
-            </div>
           </div>
         </div>
       </div>

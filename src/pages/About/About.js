@@ -3,7 +3,6 @@ import HeroImage from "../../components/HeroImage/HeroImage";
 import bgImage from "../../assets/burger.jpg";
 
 import AboutInfo from './AboutInfo/AboutInfo'
-import OurData from './OurData/OurData'
 import Gallery from './Gallery/Gallery'
 
 const About = () => {
@@ -15,7 +14,6 @@ const About = () => {
         text="Take a look at the place, the people and the food…"
       />
       <AboutInfo />
-      <OurData />
       <Gallery />
     </div>
   );

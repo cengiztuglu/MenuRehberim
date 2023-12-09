@@ -5,9 +5,9 @@ import axios from 'axios';
 const RegisterForm = () => {
   const [user,setUser]=useState({
     name:'',
-    surname:'',
+    surName:'',
     email:'',
-    username:'',
+    userName:'',
     password:''
   });
 
@@ -20,7 +20,7 @@ const RegisterForm = () => {
   }
 
   const handleRegister = () => {
-    if (user.name && user.surname && user.username && user.email && user.password) {
+    if (user.name && user.surName && user.userName && user.email && user.password) {
       setError('');
       axios.post('http://localhost:8081/api/user',user)
     .then(response=>
@@ -58,16 +58,16 @@ const RegisterForm = () => {
         />
         <Input
           type="text"
-          name='surname'
+          name='surName'
           placeholder="Soyad"
-          value={user.surname}
+          value={user.surName}
           onChange={handleInputChange}
         />
         <Input
           type="text"
-          name='username'
+          name='userName'
           placeholder="Kullanıcı Adı"
-          value={user.username}
+          value={user.userName}
           onChange={handleInputChange}
         />
         <Input

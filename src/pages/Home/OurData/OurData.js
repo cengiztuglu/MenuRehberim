@@ -7,28 +7,28 @@ const OurData = () => {
     <div className='container our-data'>
         <div className='grid-container'>
             <div>
-                <h1>17</h1>
-                <p>years of experience</p>
+                <h1>2</h1>
+                <p>Yıllık Deneyim</p>
             </div>
 
             <div>
-                <h1>34</h1>
-                <p>Team Members</p>
+                <h1>2</h1>
+                <p>Takım Üyesi</p>
             </div>
 
             <div>
-                <h1>13000</h1>
-                <p>Customers served</p>
+                <h1>10</h1>
+                <p>Restorant</p>
             </div>
 
             <div>
-                <h1>60</h1>
-                <p>Dishes</p>
+                <h1>650</h1>
+                <p>Kullanıcı</p>
             </div>
 
             <div>
-                <h1>350+</h1>
-                <p>wines</p>
+                <h1>10+</h1>
+                <p>Menü</p>
             </div>
         </div>
     </div>

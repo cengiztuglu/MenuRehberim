@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/MenuRehberimLogo.png";
 
 import "./Navbar.css";
 
@@ -35,7 +35,7 @@ const Navbar = () => {
             <img src={logo} alt="logo" width={50} />
             </li>
             <li>
-            <h1 className="nav-link">Menu Rehberim</h1>
+            <h1 className="nav-link-appname">Menu Rehberim</h1>
             </li>
           </ul>
           </Link>

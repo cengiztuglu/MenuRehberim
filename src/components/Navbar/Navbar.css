@@ -34,7 +34,19 @@
     transition: all 0.2s ease;
 }
 
+.nav-menu .nav-link-appname {
+    color: var(--color-white);
+    font-size: 35px;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
 .nav-menu .nav-link:hover,
+.active {
+    color: var(--color-primary) !important;
+}
+.nav-menu .nav-link-appname:hover,
 .active {
     color: var(--color-primary) !important;
 }
@@ -74,5 +86,8 @@
 
     .nav-menu .nav-link {
         font-size: 30px;
+    }
+    .nav-menu .nav-link-appname {
+        font-size: 40px;
     }
 }

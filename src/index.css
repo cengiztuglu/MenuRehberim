@@ -7,8 +7,8 @@
 }
 
 :root {
-  --color-primary: #c3512f;
-  --color-secondary: #7c6853;
+  --color-primary: #c10e18;
+  --color-secondary: #A6A1A1;
   --color-tertiary: #342f29;
   --color-white: #fff;
 }
@@ -54,6 +54,11 @@ label {
   max-width: 1310px;
   margin: 0 auto;
   padding: 0 50px;
+}
+
+.container span{
+  align-items: center;
+  text-align: center;
 }
 
 button {
@@ -133,6 +138,13 @@ blockquote {
   font-weight: 700;
 }
 
+.special-word-center {
+  color: var(--color-primary);
+  font-weight: 700;
+  align-items: center;
+  text-align: center;
+}
+
 .text-white {
   color: var(--color-white);
 }
@@ -144,5 +156,23 @@ blockquote {
 
   .heading-primary {
     font-size: 45px;
+  }
+  .heading-secondary {
+    color: var(--color-white);
+    font-size: 60px;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 1.1;
+    padding-bottom: 10px;
+  }
+  
+  .heading-secondary span {
+    font-weight: 700;
+  }
+
+  .heading-secondary {
+    font-size: 40px;
+    align-items: center;
+    text-align: center;
   }
 }
