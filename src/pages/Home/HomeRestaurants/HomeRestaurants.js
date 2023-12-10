@@ -3,8 +3,10 @@
 import "./HomeRestaurants.css";
 
 import image1 from "../../../assets/MenuRehberAdv01.jpeg";
-
 import image2 from "../../../assets/MenuRehberimAdv02.jpeg";
+import image3 from "../../../assets/MenuRehberimAdv02.jpeg";
+
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -31,7 +33,7 @@ const AmazingMeal = () => {
               <div className="amazing-card-title">
                 <BsFillStarFill color="#c3512f" />
                 <h3 className="heading-tertiary">
-                  the best <span>ingredients</span>
+                  <span>Burger King</span>
                 </h3>
               </div>
 
@@ -49,7 +51,25 @@ const AmazingMeal = () => {
               <div className="amazing-card-title">
                 <BsFillStarFill color="#c3512f" />
                 <h3 className="heading-tertiary">
-                  <span>reservations</span>
+                  <span>Popeyes</span>
+                </h3>
+              </div>
+
+              <p>
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+                commodo ligula eget dolor.
+              </p>
+            </div>
+          </div>
+
+          <div className="amazing-card amazing-card-right">
+            <img src={image3} alt="cheese" className="amazing-card-image" />
+
+            <div className="amazing-card-content">
+              <div className="amazing-card-title">
+                <BsFillStarFill color="#c3512f" />
+                <h3 className="heading-tertiary">
+                  <span>Arbys</span>
                 </h3>
               </div>
 
