@@ -3,7 +3,6 @@ import React from "react";
 import "./CoffeeSelection.css";
 
 import ListItem from "../../../components/ListItem/ListItem";
-import coffeeImage from "../../../assets/coffee-items.jpg";
 
 const menuDataRight = [
   {
@@ -51,9 +50,6 @@ const CoffeeSelection = () => {
       </h1>
 
       <div className="grid-container">
-        <div>
-          <img src={coffeeImage} alt="coffee items" />
-        </div>
 
         <div>
           {menuDataRight.map((data, i) => (

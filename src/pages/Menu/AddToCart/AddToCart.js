@@ -94,14 +94,6 @@ const AddToCart = () => {
       </div>
 
 
-            <div className="addtocart-btn">
-                <h1 className="heading-secondary">
-                    <span>are you </span> done?
-                </h1>
-
-                <button>show cart & checkout</button>
-            </div>
-
     </div>
   );
 };

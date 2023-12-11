@@ -2,9 +2,9 @@
 
 import "./HomeRestaurants.css";
 
-import image1 from "../../../assets/MenuRehberAdv01.jpeg";
-import image2 from "../../../assets/MenuRehberimAdv02.jpeg";
-import image3 from "../../../assets/MenuRehberimAdv02.jpeg";
+import image1 from "../../../assets/RestaurantImages/Burgerking/Burgerking_Bg.jpeg";
+import image2 from "../../../assets/RestaurantImages/Popeyes/Popeyes_Bg.jpeg";
+import image3 from "../../../assets/RestaurantImages/Arbys/Arbys_Bg.jpeg";
 
 
 import "slick-carousel/slick/slick.css";

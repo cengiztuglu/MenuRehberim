@@ -1,0 +1,26 @@
+.pill-nav {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navitem {
+    margin: 5px;
+    border: 1px solid #c10e18; 
+    background-color: #c10e18;
+    padding: 10px; 
+    border-radius: 10px; 
+  }
+
+.navitem .nav-link {
+    color: #fff; /* Yazı rengi */
+    font-weight: bold; /* Kalın yazı */
+  }
+
+  .navitem .nav-link:hover {
+    color: black; /* Yazı rengi */
+    font-weight: bold; /* Kalın yazı */
+  }
+
+  .navitem .nav-link:visited {
+    color: black; /* Ziyaret edildikten sonra yazı rengi */
+  }
