@@ -3,99 +3,174 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const RegisterForm = () => {
-  const [user,setUser]=useState({
-    name:'',
-    surName:'',
-    email:'',
-    userName:'',
-    password:''
+  const [isRestoranRegister, setIsRestoranRegister] = useState(false);
+  const [user, setUser] = useState({
+    name: '',
+    surName: '',
+    email: '',
+    userName: '',
+    password: '',
+    restoranName: '',
+    category: '',
+    restoranImage: '',
+    description: '',
+    restoranPassword: ''
   });
-
- 
   const [error, setError] = useState(null);
 
-  const handleInputChange=(event)=>{
-    const{name,value}=event.target;
-    setUser({...user,[name]:value});
-  }
+  const toggleRegisterType = () => {
+    setIsRestoranRegister(!isRestoranRegister);
+  };
 
-  const handleRegister = () => {
-    if (user.name && user.surName && user.userName && user.email && user.password) {
-      setError('');
-      axios.post('http://localhost:8081/api/user',user)
-    .then(response=>
-      {
-        if(response.data===true){
-          console.error("Kayıt Başarılı");
-          
-        }
-        else{
-          console.error("kayıtta patladı");
-        }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
 
-      }).catch(error=>{console.error("bende patladı");})
-      alert('Başarıyla kayıt oldunuz!');
-      // Kayıt başarılıysa başka bir sayfaya yönlendirme yapılabilir.
+  const handleRegister = (event) => {
+    event.preventDefault();
+    if (!isRestoranRegister) {
+      // Kullanıcı kaydı
+      if (user.name && user.surName && user.userName && user.email && user.password) {
+        setError('');
+        axios.post('http://localhost:8081/api/user', user)
+          .then(response => {
+            if (response.data === true) {
+              console.error("Kullanıcı Kaydı Başarılı");
+              // Başarılı kayıt durumunda başka bir sayfaya yönlendirme yapılabilir.
+            } else {
+              console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
+            }
+          }).catch(error => {
+            console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
+          });
+      } else {
+        setError('Lütfen tüm alanları doldurun.');
+      }
     } else {
-      setError('Lütfen tüm alanları doldurun.');
+      // Restoran kaydı
+      if (user.restoranName && user.category && user.restoranImage && user.description && user.restoranPassword) {
+        setError('');
+        axios.post('http://localhost:8081/api/restoran', user)
+          .then(response => {
+            if (response.data === true) {
+              console.error("Restoran Kaydı Başarılı");
+              // Başarılı kayıt durumunda başka bir sayfaya yönlendirme yapılabilir.
+            } else {
+              console.error("Restoran kaydı sırasında bir hata oluştu.");
+            }
+          }).catch(error => {
+            console.error("Restoran kaydı sırasında bir hata oluştu.");
+          });
+      } else {
+        setError('Lütfen tüm alanları doldurun.');
+      }
     }
-    
-    // Kayıt işlemi genellikle sunucuya istek yaparak gerçekleştirilir.
-    // Örnek olarak burada basit bir kontrol yapılıyor.
-    
   };
 
   return (
     <Container>
-      <Form onSubmit={handleRegister} >
-        <Title>Register</Title>
-        <Input
-          type="text"
-          name='name'
-          placeholder="Ad"
-          value={user.name}
-          onChange={handleInputChange}
-        />
-        <Input
-          type="text"
-          name='surName'
-          placeholder="Soyad"
-          value={user.surName}
-          onChange={handleInputChange}
-        />
-        <Input
-          type="text"
-          name='userName'
-          placeholder="Kullanıcı Adı"
-          value={user.userName}
-          onChange={handleInputChange}
-        />
-        <Input
-        name='email'
-          type="email"
-          placeholder="E-posta Adresi"
-          value={user.email}
-          onChange={handleInputChange}
-        />
-        <Input
-        name='password'
-          type="password"
-          placeholder="Şifre"
-          value={user.password}
-          onChange={handleInputChange}
-        />
-        <Button type='submit'>Kayıt Ol</Button>
-        {error && <Error>{error}</Error>}
+      <Title>Kayıt Ol</Title>
+      <RegisterOptionContainer>
+        <RegisterOptionButton onClick={toggleRegisterType} selected={!isRestoranRegister}>
+          Kullanıcı Kaydı
+        </RegisterOptionButton>
+        <RegisterOptionButton onClick={toggleRegisterType} selected={isRestoranRegister}>
+          Restoran Kaydı
+        </RegisterOptionButton>
+      </RegisterOptionContainer>
+      <Form onSubmit={handleRegister}>
+        {isRestoranRegister ? (
+          <>
+            <Input
+              type="text"
+              name='restoranName'
+              placeholder="Restoran Adı"
+              value={user.restoranName}
+              onChange={handleInputChange}
+            />
+            <Input
+              type="text"
+              name='category'
+              placeholder="Kategori"
+              value={user.category}
+              onChange={handleInputChange}
+            />
+            <Input
+              type="text"
+              name='restoranImage'
+              placeholder="Restoran Fotoğrafı"
+              value={user.restoranImage}
+              onChange={handleInputChange}
+            />
+            <Input
+              type="text"
+              name='description'
+              placeholder="Tanım"
+              value={user.description}
+              onChange={handleInputChange}
+            />
+            <Input
+              name='restoranPassword'
+              type="password"
+              placeholder="Şifre"
+              value={user.restoranPassword}
+              onChange={handleInputChange}
+            />
+          </>
+        ) : (
+          <>
+            <Input
+              type="text"
+              name='name'
+              placeholder="Ad"
+              value={user.name}
+              onChange={handleInputChange}
+            />
+            <Input
+              type="text"
+              name='surName'
+              placeholder="Soyad"
+              value={user.surName}
+              onChange={handleInputChange}
+            />
+            <Input
+              type="text"
+              name='userName'
+              placeholder="Kullanıcı Adı"
+              value={user.userName}
+              onChange={handleInputChange}
+            />
+            <Input
+              name='email'
+              type="email"
+              placeholder="E-posta Adresi"
+              value={user.email}
+              onChange={handleInputChange}
+            />
+            <Input
+              name='password'
+              type="password"
+              placeholder="Şifre"
+              value={user.password}
+              onChange={handleInputChange}
+            />
+          </>
+        )}
+        <Button type='submit'>{isRestoranRegister ? 'Restoran Kaydı Oluştur' : 'Kullanıcı Kaydı Oluştur'}</Button>
       </Form>
+      {error && <Error>{error}</Error>}
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   height: 100vh;
+  padding-top: 50px;
   background-color: #f5f5f5;
 `;
 
@@ -107,6 +182,7 @@ const Form = styled.form`
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  width: 300px;
 `;
 
 const Title = styled.h2`
@@ -119,7 +195,7 @@ const Input = styled.input`
   margin-bottom: 16px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  width: 300px;
+  width: 100%;
   font-size: 16px;
 `;
 
@@ -140,6 +216,28 @@ const Button = styled.button`
 const Error = styled.p`
   color: red;
   margin-top: 8px;
+`;
+
+const RegisterOptionContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+`;
+
+const RegisterOptionButton = styled.button`
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  background-color: ${(props) => (props.selected ? '#007bff' : 'transparent')};
+  color: ${(props) => (props.selected ? 'white' : '#007bff')};
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0 8px;
+
+  &:hover {
+    background-color: ${(props) => (props.selected ? '#0056b3' : '#f5f5f5')};
+    color: ${(props) => (props.selected ? 'white' : '#0056b3')};
+  }
 `;
 
 export default RegisterForm;
