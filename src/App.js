@@ -9,7 +9,7 @@ import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
-
+import PlaceEdit from './pages/PlaceEdit/PlaceEdit'
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/PlaceEdit" element={<PlaceEdit />} />
 
 
     </Routes>

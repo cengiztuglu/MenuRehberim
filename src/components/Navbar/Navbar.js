@@ -64,6 +64,12 @@ const Navbar = () => {
             </li>
 
             <li onClick={handleClick}>
+              <NavLink className="nav-link" to="/placeedit">
+                Place Edit
+              </NavLink>
+            </li>
+
+            <li onClick={handleClick}>
               <button>Order now</button>
             </li>
 

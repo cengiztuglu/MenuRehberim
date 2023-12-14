@@ -12,7 +12,8 @@ const HeroImage = (props) => {
     >
         <div className="banner-content">
             <h1 className="heading-primary">{props.heading}</h1>
-            <p className="text-white">{props.text}</p>
+            <h4 className="text-white"><br/>{props.text}</h4>
+            <p className="text-white"><br/><br/>{props.textadress}</p>
         </div>
     </div>
   );
