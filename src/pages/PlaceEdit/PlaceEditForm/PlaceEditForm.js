@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import "./PlaceEditForm.css";
 
-const RegisterForm = () => {
+const PlaceEditForm = () => {
   const [user, setUser] = useState({
     name: '',
     surName: '',
@@ -26,7 +26,7 @@ const RegisterForm = () => {
     setUser({ ...user, [name]: value });
   };
 
-  const handleRegister = (event) => {
+  const handleEditer = (event) => {
     event.preventDefault();
    
       // Kullanıcı kaydı
@@ -66,7 +66,7 @@ const RegisterForm = () => {
         <FormHeader/>  
       </FormHeaderC>
 
-      <Form onSubmit={handleRegister}>
+      <Form onSubmit={handleEditer}>
         { (
           <>
             <InputContainer>
@@ -208,4 +208,4 @@ const InputContainer = styled.div`
   width: 100%;
 `;
 
-export default RegisterForm;
+export default PlaceEditForm;
