@@ -10,8 +10,13 @@ import Footer from './components/Footer/Footer'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import PlaceEdit from './pages/PlaceEdit/PlaceEdit'
+import { useLocation } from 'react-router-dom';
 
 function App() {
+
+  const location = useLocation();
+
+
   return (
     <div>
     <Navbar />
@@ -22,7 +27,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/PlaceEdit" element={<PlaceEdit />} />
+      <Route path="/PlaceEdit" element={<PlaceEdit location={location} />} />
 
 
     </Routes>

@@ -29,12 +29,12 @@ const LoginForm = () => {
     if (user.isRestaurantLogin) {
       // Restaurant giriş kontrolü ve API isteği
       axios.post('http://localhost:8081/api/rlogin', {
-        restourantName: user.userName,
-        restourantPassword: user.password
+        userName: user.userName,
+        password: user.password
       })
       .then(response => {
         console.log(response.data); // Geri dönen veriye göre işlem yapılabilir
-        navigate('/menu'); // Örnek bir yönlendirme
+        navigate('/PlaceEdit', { state: { username: user.userName } });
       })
       .catch(error => {
         setError('Restoran girişi sırasında bir hata oluştu. Lütfen tekrar deneyin.');
@@ -48,7 +48,7 @@ const LoginForm = () => {
       .then(response => {
         if (response.data === 'Giriş başarılı!') {
           console.log('Kullanıcı girişi başarılı!');
-          navigate('/menu'); // Örnek bir yönlendirme
+          navigate('/placeEdit'); // Örnek bir yönlendirme
         } else {
           setError('Kullanıcı adı veya şifre hatalı.');
         }

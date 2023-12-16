@@ -50,7 +50,7 @@ const RegisterForm = () => {
       }
     } else {
       // Restoran kaydı
-      if (user.restourantName && user.restourantPassword &&user.placeDefinition &&  user.placeAdress&&user.placeBgPicName &&user.category) {
+      if (user.name && user.surName &&user.userName &&  user.email&&user.password) {
         setError('');
         axios.post('http://localhost:8081/api/restourantAdd', user)
           .then(response => {
@@ -83,46 +83,40 @@ const RegisterForm = () => {
       <Form onSubmit={handleRegister}>
         {isRestoranRegister ? (
           <>
+          
             <Input
               type="text"
-              name='restourantName'
-              placeholder="Restoran Adı"
-              value={user.restourantName}
+              name='name'
+              placeholder="name"
+              value={user.name}
               onChange={handleInputChange}
             />
             <Input
               type="text"
-              name='category'
-              placeholder="Kategori"
-              value={user.category}
+              name='surName'
+              placeholder="SoyAd"
+              value={user.surName}
               onChange={handleInputChange}
             />
             <Input
               type="text"
-              name='placeAdress'
-              placeholder="placeAdress"
-              value={user.placeAdress}
+              name='userName'
+              placeholder="KullanıcıAdı"
+              value={user.userName}
               onChange={handleInputChange}
             />
             <Input
-              type="text"
-              name='placeBgPicName'
-              placeholder="Restoran Fotoğrafı"
-              value={user.placeBgPicName}
+              type="email"
+              name='email'
+              placeholder="email"
+              value={user.email}
               onChange={handleInputChange}
             />
             <Input
-              type="text"
-              name='placeDefinition'
-              placeholder="Tanım"
-              value={user.placeDefinition}
-              onChange={handleInputChange}
-            />
-            <Input
-              name='restourantPassword'
+              name='password'
               type="password"
               placeholder="Şifre"
-              value={user.restourantPassword}
+              value={user.password}
               onChange={handleInputChange}
             />
           </>

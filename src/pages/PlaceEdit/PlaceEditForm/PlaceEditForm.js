@@ -4,19 +4,14 @@ import axios from 'axios';
 
 import "./PlaceEditForm.css";
 
-const PlaceEditForm = () => {
+const PlaceEditForm = ({ username }) => {
   const [user, setUser] = useState({
-    name: '',
-    surName: '',
-    email: '',
-    userName: '',
-    password: '',
     restourantName: '',
     category: '',
     placeAdress:'',
     placeBgPicName: '',
     placeDefinition: '',
-    restourantPassword: ''
+   
   });
   const [error, setError] = useState(null);
 
@@ -30,10 +25,10 @@ const PlaceEditForm = () => {
     event.preventDefault();
    
       // Kullanıcı kaydı
-      if (user.name && user.surName && user.userName && user.email && user.password) {
+      if (user.restourantName && user.placeDefinition && user.placeAdress && user.placeBgPicName&& user.category) {
         setError('');
-        axios.post('http://localhost:8081/api/user', user)
-          .then(response => {
+        axios.post(`http://localhost:8081/api/placeAdd/${username}`, user)
+        .then(response => {
             if (response.data === true) {
               console.error("Kullanıcı Kaydı Başarılı");
               // Başarılı kayıt durumunda başka bir sayfaya yönlendirme yapılabilir.
@@ -53,7 +48,7 @@ const PlaceEditForm = () => {
       <div >
         <div >
             <h2 className="heading-secondary">
-              Restoranınızı Tanımlayın ! 
+              Restoranınızı Tanımlayın {username} ! 
             </h2>
         </div>
       </div>
@@ -73,9 +68,9 @@ const PlaceEditForm = () => {
                 <InputLabel>Restoran Ad :</InputLabel>
                 <Input
                  type="text"
-                 name='restAd'
+                 name='restourantName'
                  placeholder="Restoran Adı"
-                value={user.name}
+                value={user.restourantName}
                 onChange={handleInputChange}
                 />
             </InputContainer>
@@ -83,9 +78,9 @@ const PlaceEditForm = () => {
             <InputLabel>Restoran Açıklama :</InputLabel>
             <Input
               type="text"
-              name='restAciklama'
+              name='placeDefinition'
               placeholder="Restoran Acçıklaması"
-              value={user.surName}
+              value={user.placeDefinition}
               onChange={handleInputChange}
             />
              </InputContainer>
@@ -94,29 +89,29 @@ const PlaceEditForm = () => {
             <InputLabel>Restoran Adres :</InputLabel>
             <Input
               type="text"
-              name='restAdres'
-              placeholder="Restoran Adresi"
-              value={user.userName}
+              name='placeAdress'
+              placeholder="Restourant Adresi"
+              value={user.placeAdress}
               onChange={handleInputChange}
             />
             </InputContainer>
             <InputContainer>
             <InputLabel>Restoran Profil Fotoğrafı :</InputLabel>
             <Input
-              name='email'
-              type="email"
-              placeholder="E-posta Adresi"
-              value={user.email}
+              name='placeBgPicName'
+              type="text"
+              placeholder="kapak fotoğrafı"
+              value={user.placeBgPicName}
               onChange={handleInputChange}
             />
             </InputContainer>
             <InputContainer>
             <InputLabel>Restoran Kategorisi :</InputLabel>
             <Input
-              name='password'
-              type="password"
-              placeholder="Şifre"
-              value={user.password}
+              name='category'
+              type="text"
+              placeholder="Kategori"
+              value={user.category}
               onChange={handleInputChange}
             />
             </InputContainer>
