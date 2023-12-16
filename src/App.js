@@ -11,6 +11,7 @@ import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import PlaceEdit from './pages/PlaceEdit/PlaceEdit'
 import { useLocation } from 'react-router-dom';
+import MenuEdit from './pages/MenuEdit/MenuEdit'
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/PlaceEdit" element={<PlaceEdit location={location} />} />
+      <Route path="/MenuEdit" element={<MenuEdit />} />
 
 
     </Routes>

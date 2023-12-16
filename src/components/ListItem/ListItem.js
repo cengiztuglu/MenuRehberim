@@ -13,7 +13,7 @@ const ListItem = ({title, description, price, itemImage}) => {
                     {description && <p>{description}</p>}
                 </div>
 
-                <h3>${price}</h3>
+                <h3>{price} TL</h3>
             </li>
         </ul>
     </div>

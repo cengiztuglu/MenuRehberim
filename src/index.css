@@ -168,6 +168,7 @@ blockquote {
   
   .heading-secondary span {
     font-weight: 700;
+    align-items: center;
   }
 
   .heading-secondary {
