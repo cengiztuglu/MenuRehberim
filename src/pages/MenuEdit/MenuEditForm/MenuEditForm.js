@@ -1,41 +1,38 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+
 
 import "./MenuEditForm.css";
 
-const MenuEditForm = () => {
-  const [user, setUser] = useState({
-    name: '',
-    surName: '',
-    email: '',
-    userName: '',
-    password: '',
-    restourantName: '',
-    category: '',
-    placeAdress:'',
-    placeBgPicName: '',
-    placeDefinition: '',
-    restourantPassword: ''
+const MenuEditForm = ({username}) => {
+  const [item, setUser] = useState({
+    itemName: '',
+    itemDefination: '',
+    itemPicName: '',
+    itemPrice: '',
+  
   });
   const [error, setError] = useState(null);
 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
+    setUser({ ...item, [name]: value });
   };
 
   const handleEditer = (event) => {
     event.preventDefault();
    
       // Kullanıcı kaydı
-      if (user.name && user.surName && user.userName && user.email && user.password) {
+      if (item.itemName && item.itemDefination && item.itemPicName&& item.itemPrice ) {
         setError('');
-        axios.post('http://localhost:8081/api/user', user)
+        axios.post(`http://localhost:8081/api/menuItemAdd/${username}`, item)
           .then(response => {
             if (response.data === true) {
-              console.error("Kullanıcı Kaydı Başarılı");
+              console.error("Menü ürün Eklendi");
+              
               // Başarılı kayıt durumunda başka bir sayfaya yönlendirme yapılabilir.
             } else {
               console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
@@ -53,7 +50,7 @@ const MenuEditForm = () => {
       <div >
         <div >
             <h2 className="heading-secondary">
-              Menu İçeriğinizi Kaydedin ! 
+              Menu İçeriğinizi Kaydedin {username}! 
             </h2>
         </div>
       </div>
@@ -86,9 +83,9 @@ const MenuEditForm = () => {
                 <InputLabel>Urun Ad :</InputLabel>
                 <Input
                  type="text"
-                 name='urunAd'
+                 name='itemName'
                  placeholder="Urun Adı"
-                value={user.name}
+                value={item.itemName}
                 onChange={handleInputChange}
                 />
             </InputContainer>
@@ -96,9 +93,9 @@ const MenuEditForm = () => {
             <InputLabel>Urun Açıklama :</InputLabel>
             <Input
               type="text"
-              name='urunAciklama'
+              name='itemDefination'
               placeholder="Urun Açıklaması"
-              value={user.surName}
+              value={item.itemDefination}
               onChange={handleInputChange}
             />
              </InputContainer>
@@ -107,23 +104,23 @@ const MenuEditForm = () => {
             <InputLabel>Urun Fotografı :</InputLabel>
             <Input
               type="text"
-              name='urunFotograf'
+              name='itemPicName'
               placeholder="Urun Fotografı"
-              value={user.userName}
+              value={item.itemPicName}
               onChange={handleInputChange}
             />
             </InputContainer>
             <InputContainer>
             <InputLabel>Urun Fiyatı :</InputLabel>
             <Input
-              name='urunFiyat'
+              name='itemPrice'
               type="text"
               placeholder="Urun Fiyatı"
-              value={user.email}
+              value={item.itemPrice}
               onChange={handleInputChange}
             />
             </InputContainer>
-            <InputContainer>
+            {/* <InputContainer>
             <InputLabel>Urun Kategorisi :</InputLabel>
             <Input
               name='Urun Kategorisi'
@@ -133,7 +130,7 @@ const MenuEditForm = () => {
               onChange={handleInputChange}
             />
             </InputContainer>
-            
+             */}
           </>
         )}
         <Button type='submit'>{ 'Urun Kaydet'}</Button>
@@ -142,7 +139,7 @@ const MenuEditForm = () => {
       {error && <Error>{error}</Error>}
 
 
-      <FormCategory onSubmit={handleEditer}>
+     {/* <FormCategory onSubmit={handleEditer}>
         { (
           <>
           <TextInfoC>
@@ -161,7 +158,7 @@ const MenuEditForm = () => {
           </>
         )}
         <Button type='submit'>{ 'Kategori Kaydet'}</Button>
-      </FormCategory>
+      </FormCategory> */}
       {error && <Error>{error}</Error>}
     
     </Container>

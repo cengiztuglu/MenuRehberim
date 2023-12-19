@@ -29,7 +29,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/PlaceEdit" element={<PlaceEdit location={location} />} />
-      <Route path="/MenuEdit" element={<MenuEdit />} />
+      <Route path="/MenuEdit" element={<MenuEdit location={location}/>} />
 
 
     </Routes>

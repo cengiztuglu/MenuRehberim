@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 import "./PlaceEditForm.css";
+import { FormGroup } from 'react-bootstrap';
 
 const PlaceEditForm = ({ username }) => {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     restourantName: '',
     category: '',
@@ -24,17 +29,15 @@ const PlaceEditForm = ({ username }) => {
   const handleEditer = (event) => {
     event.preventDefault();
    
-      // Kullanıcı kaydı
+      // restourant kaydı
       if (user.restourantName && user.placeDefinition && user.placeAdress && user.placeBgPicName&& user.category) {
         setError('');
         axios.post(`http://localhost:8081/api/placeAdd/${username}`, user)
         .then(response => {
-            if (response.data === true) {
-              console.error("Kullanıcı Kaydı Başarılı");
-              // Başarılı kayıt durumunda başka bir sayfaya yönlendirme yapılabilir.
-            } else {
-              console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
-            }
+           
+              console.error(response.data);
+              navigate('/MenuEdit',{ state: {username } })
+           
           }).catch(error => {
             console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
           });
@@ -98,11 +101,12 @@ const PlaceEditForm = ({ username }) => {
             <InputContainer>
             <InputLabel>Restoran Profil Fotoğrafı :</InputLabel>
             <Input
-              name='placeBgPicName'
-              type="text"
-              placeholder="kapak fotoğrafı"
-              value={user.placeBgPicName}
-              onChange={handleInputChange}
+               type="text"
+               accept=".jpg, .jpeg, .png" // Sadece belirli formatlardaki dosyaların seçilmesini sağlar
+               name='placeBgPicName'
+               value={user.placeBgPicName}
+
+               onChange={handleInputChange}
             />
             </InputContainer>
             <InputContainer>

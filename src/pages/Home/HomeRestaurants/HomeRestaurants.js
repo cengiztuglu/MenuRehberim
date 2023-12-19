@@ -2,17 +2,30 @@
 
 import "./HomeRestaurants.css";
 
-import image1 from "../../../assets/RestaurantImages/Burgerking/Burgerking_Bg.jpeg";
-import image2 from "../../../assets/RestaurantImages/Popeyes/Popeyes_Bg.jpeg";
-import image3 from "../../../assets/RestaurantImages/Arbys/Arbys_Bg.jpeg";
 
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { BsFillStarFill } from "react-icons/bs";
+import { useEffect, useState } from "react";
 
 const AmazingMeal = () => {
+  const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    // API'den verileri almak için bir istek yapılabilir
+    fetch('http://localhost:8081/api/getPlace')
+  .then(response => response.json())
+  .then(data => {
+    // Gelen verileri id'ye göre sırala
+    const sortedPlaces = data.sort((a, b) => a.id - b.id);
+    setPlaces(sortedPlaces);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+  }, []);
 
   return (
     <div className="section">
@@ -24,61 +37,23 @@ const AmazingMeal = () => {
         </span>
 
         <div className="amazing-card-container">
-
-          <div className="amazing-card amazing-card-left">
-
-            <img src={image1} alt="burger" className="amazing-card-image" />
-
-            <div className="amazing-card-content">
-              <div className="amazing-card-title">
-                <BsFillStarFill color="#c3512f" />
-                <h3 className="heading-tertiary">
-                  <span>Burger King</span>
-                </h3>
+          {places.map((place, index) => (
+            <div className={`amazing-card amazing-card-${index % 2 === 0 ? 'left' : 'right'}`} key={place.id}>
+              {/* Restoran resmi veya diğer özellikler buraya eklenebilir */}
+              <div className="amazing-card-content">
+                <div className="amazing-card-title">
+                  <BsFillStarFill color="#c3512f" />
+                  <h3 className="heading-tertiary">
+                    <span>{place.restourantName}</span>
+                  </h3>
+                </div>
+                <p>{place.placeDefinition}</p>
+                <p>{place.placeAdress}</p>
+                <p>{place.category}</p>
+               
               </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                commodo ligula eget dolor.
-              </p>
             </div>
-          </div>
-
-          <div className="amazing-card amazing-card-right">
-            <img src={image2} alt="cheese" className="amazing-card-image" />
-
-            <div className="amazing-card-content">
-              <div className="amazing-card-title">
-                <BsFillStarFill color="#c3512f" />
-                <h3 className="heading-tertiary">
-                  <span>Popeyes</span>
-                </h3>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                commodo ligula eget dolor.
-              </p>
-            </div>
-          </div>
-
-          <div className="amazing-card amazing-card-right">
-            <img src={image3} alt="cheese" className="amazing-card-image" />
-
-            <div className="amazing-card-content">
-              <div className="amazing-card-title">
-                <BsFillStarFill color="#c3512f" />
-                <h3 className="heading-tertiary">
-                  <span>Arbys</span>
-                </h3>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-                commodo ligula eget dolor.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
