@@ -90,7 +90,7 @@ const PlaceEditForm = ({ username }) => {
             <Input
               type="text"
               name='placeDefinition'
-              placeholder="Restoran Acçıklaması"
+              placeholder="Restoran Açıklaması"
               value={user.placeDefinition}
               onChange={handleInputChange}
             />
