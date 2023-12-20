@@ -3,47 +3,55 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
-import "./PlaceEditForm.css";
-import { FormGroup } from 'react-bootstrap';
-
 const PlaceEditForm = ({ username }) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
     restourantName: '',
     category: '',
-    placeAdress:'',
-    placeBgPicName: '',
+    placeAdress: '',
+    placeBgPicName: null,
     placeDefinition: '',
-   
   });
   const [error, setError] = useState(null);
-
-
+  const [placeBgPicName, setPlaceBgPicName] = useState(null); 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
 
-  const handleEditer = (event) => {
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setPlaceBgPicName(file); // 
+  };
+
+  const handleEditer = async (event) => {
     event.preventDefault();
-   
-      // restourant kaydı
-      if (user.restourantName && user.placeDefinition && user.placeAdress && user.placeBgPicName&& user.category) {
-        setError('');
-        axios.post(`http://localhost:8081/api/placeAdd/${username}`, user)
-        .then(response => {
-           
-              console.error(response.data);
-              navigate('/MenuEdit',{ state: {username } })
-           
-          }).catch(error => {
-            console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
-          });
-      } else {
-        setError('Lütfen tüm alanları doldurun.');
+
+    if (user.restourantName && user.placeDefinition && user.placeAdress && user.category ) {
+      setError('');
+
+      try {
+        const userDataResponse = await axios.post(`http://localhost:8081/api/placeAdd/${username}`, user);
+        console.log(userDataResponse.data);
+
+        const file = new FormData();
+        file.append('file',placeBgPicName);
+
+        const imageUploadResponse = await axios.post(`http://localhost:8081/api/upload/${user.restourantName}`, file, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log(imageUploadResponse.data);
+
+        navigate('/MenuEdit', { state: { username } });
+      } catch (error) {
+        console.error("Bir hata oluştu:", error);
       }
+    } else {
+      setError('Lütfen tüm alanları doldurun.');
+    }
   };
 
   const FormHeader = () => {
@@ -101,12 +109,11 @@ const PlaceEditForm = ({ username }) => {
             <InputContainer>
             <InputLabel>Restoran Profil Fotoğrafı :</InputLabel>
             <Input
-               type="text"
-               accept=".jpg, .jpeg, .png" // Sadece belirli formatlardaki dosyaların seçilmesini sağlar
+               type="file"
+               accept=".jpg, .jpeg, .png" 
                name='placeBgPicName'
-               value={user.placeBgPicName}
 
-               onChange={handleInputChange}
+               onChange={handleFileChange}
             />
             </InputContainer>
             <InputContainer>
