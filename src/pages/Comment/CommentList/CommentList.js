@@ -7,18 +7,19 @@ import "./CommentList.css";
 
 const CommentListShow = ({ comments }) => {
   return (
-        <div>
-          <ul>
-            {comments.map((comment, index) => (
-              <li key={index}>
-                <strong>{comment.username} :  </strong> {comment.text}{' '}
-                <span style={{ fontSize: '1em', color: 'gray' }}>
-                  ({new Date(comment.date).toLocaleString()})
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div>
+    <ul style={commentStyle}>
+        <h1 style={headerPrimary}>Ürün Yorumları</h1>
+      {comments.map((comment, index) => (
+        <li key={index} style={listItemStyle}>
+          <strong>{comment.username}:</strong> {comment.text}{' '}
+          <span style={{ fontSize: '0.8em', color: 'gray' }}>
+            ({new Date(comment.date).toLocaleString()})
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
   );
 };
 
@@ -35,6 +36,7 @@ const CommentList = () => {
       date: '2023-12-19T15:30:00Z',
     },
 
+    
   ];
 
   return (
@@ -43,8 +45,7 @@ const CommentList = () => {
     <FormCategory>
       { (
         <>
-          <h1>Ürün Yorumları</h1>
-          <CommentListShow comments={comments} />
+          <CommentListShow comments={comments} style={commentListShowStyle}/>
         </>
       )}
     </FormCategory>
@@ -52,6 +53,27 @@ const CommentList = () => {
   </Container>
   );
 };
+
+const commentStyle = {
+    listStyle: 'none',
+    paddingLeft: 0,
+    marginLeft: 0,
+  };
+
+  const listItemStyle = {
+    marginBottom: '30px',
+    textAlign: 'left',
+  };
+
+  const commentListShowStyle = {
+    marginBottom: '30px',
+    textAlign: 'left',
+  };
+
+  const headerPrimary = {
+    textAlign: 'center',
+    marginBottom:'40px',
+  };
 
 
 const Container = styled.div`
@@ -71,7 +93,6 @@ const Container = styled.div`
 const FormCategory = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 30px;
   margin-top: 15px;
   border-radius: 8px;
