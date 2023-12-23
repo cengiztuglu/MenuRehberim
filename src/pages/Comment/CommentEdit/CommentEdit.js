@@ -154,9 +154,8 @@ const Container = styled.div`
   justify-content: flex-start;
   height: 100vh;
   padding-top: 50px;
-  padding-bottom: 100px;
   background-color: #cac6c6;
-  max-width: 90%; 
+  max-width: 90%;
   margin: 0 auto; 
 `;
 

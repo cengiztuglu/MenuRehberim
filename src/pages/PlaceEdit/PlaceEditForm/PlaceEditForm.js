@@ -76,29 +76,29 @@ const PlaceEditForm = ({ username }) => {
           <FormHeader/>  
         </FormHeaderC>
 
-        <Form onSubmit={handleEditer}>
-          { (
-            <>
-              <InputContainer>
-                  <InputLabel>Restoran Ad :</InputLabel>
-                  <Input
-                  type="text"
-                  name='restourantName'
-                  placeholder="Restoran Adı"
-                  value={place.restourantName}
-                  onChange={handleInputChange}
-                  />
-              </InputContainer>
-              <InputContainer>
-              <InputLabel>Restoran Açıklama :</InputLabel>
-              <Input
-                type="text"
-                name='placeDefinition'
-                placeholder="Restoran Acçıklaması"
-                value={place.placeDefinition}
+      <Form onSubmit={handleEditer}>
+        { (
+          <>
+            <InputContainer>
+                <InputLabel>Restoran Ad :</InputLabel>
+                <Input
+                 type="text"
+                 name='restourantName'
+                 placeholder="Restoran Adı"
+                value={user.restourantName}
                 onChange={handleInputChange}
-              />
-              </InputContainer>
+                />
+            </InputContainer>
+            <InputContainer>
+            <InputLabel>Restoran Açıklama :</InputLabel>
+            <Input
+              type="text"
+              name='placeDefinition'
+              placeholder="Restoran Acçıklaması"
+              value={user.placeDefinition}
+              onChange={handleInputChange}
+            />
+             </InputContainer>
 
               <InputContainer>
               <InputLabel>Restoran Adres :</InputLabel>

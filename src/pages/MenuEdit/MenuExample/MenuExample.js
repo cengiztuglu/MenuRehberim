@@ -31,7 +31,7 @@ const menuDataRight = [
   {
     title: "Örnek ürün adı",
     description: "Örnek ürün açıklaması.",
-    price: 33.0,
+    price: 38.0,
     img: image5,
   },
 ];
