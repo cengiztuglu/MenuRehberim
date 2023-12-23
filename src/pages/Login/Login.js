@@ -28,7 +28,7 @@ const LoginForm = () => {
 
     if (user.isRestaurantLogin) {
       // Restaurant giriş kontrolü ve API isteği
-      axios.post('http://localhost:8081/api/rlogin', {
+      axios.post('http://localhost:8080/api/rlogin', {
         userName: user.userName,
         password: user.password
       })
@@ -41,7 +41,7 @@ const LoginForm = () => {
       });
     } else {
       // Kullanıcı giriş kontrolü ve API isteği
-      axios.post('http://localhost:8081/api/login', {
+      axios.post('http://localhost:8080/api/login', {
         userName: user.userName,
         password: user.password
       })

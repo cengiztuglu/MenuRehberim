@@ -34,7 +34,7 @@ const RegisterForm = () => {
       // Kullanıcı kaydı
       if (user.name && user.surName && user.userName && user.email && user.password) {
         setError('');
-        axios.post('http://localhost:8081/api/user', user)
+        axios.post('http://localhost:8080/api/user', user)
           .then(response => {
             if (response.data === true) {
               console.error("Kullanıcı Kaydı Başarılı");
@@ -52,7 +52,7 @@ const RegisterForm = () => {
       // Restoran kaydı
       if (user.name && user.surName &&user.userName &&  user.email&&user.password) {
         setError('');
-        axios.post('http://localhost:8081/api/restourantAdd', user)
+        axios.post('http://localhost:8080/api/restourantAdd', user)
           .then(response => {
             if (response.data === true) {
               console.error("Restoran Kaydı Başarılı");

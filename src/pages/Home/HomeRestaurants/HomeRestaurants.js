@@ -47,13 +47,17 @@ const AmazingMeal = () => {
               <div className="amazing-card-content">
                 <div className="amazing-card-title">
                   <BsFillStarFill color="#c3512f" />
+                
                   <h3 className="heading-tertiary">
                     <span>{place.restourantName}</span>
                   </h3>
+                  
                 </div>
+                <img src={`data:image/jpeg;base64,${place.placeBgPicName}`} />
                 <p>{place.placeDefinition}</p>
                 <p>{place.placeAdress}</p>
                 <p>{place.category}</p>
+              
               </div>
             </div>
           ))}
