@@ -13,7 +13,8 @@ import PlaceEdit from './pages/PlaceEdit/PlaceEdit'
 import { useLocation } from 'react-router-dom';
 import MenuEdit from './pages/MenuEdit/MenuEdit'
 import Comment from './pages/Comment/Comment'
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
   const location = useLocation();
@@ -22,6 +23,8 @@ function App() {
   return (
     <div>
     <Navbar />
+    <ToastContainer />
+
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/menu" element={<Menu />} />
@@ -32,6 +35,8 @@ function App() {
       <Route path="/PlaceEdit" element={<PlaceEdit location={location} />} />
       <Route path="/MenuEdit" element={<MenuEdit location={location}/>} />
       <Route path="/Comment" element={<Comment />} />
+      
+
 
 
     </Routes>

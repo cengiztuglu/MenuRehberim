@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const PlaceEditForm = ({ username }) => {
   const [place, setPlace] = useState({
@@ -16,6 +20,8 @@ const PlaceEditForm = ({ username }) => {
     const { name, value } = event.target;
     setPlace({ ...place, [name]: value });
   };
+  const navigate = useNavigate();
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -46,7 +52,13 @@ const PlaceEditForm = ({ username }) => {
 
         if (response.status === 200) {
           console.error('Bilgiler ve dosya başarıyla yüklendi');
-          // Başka bir işlem yapılabilir
+          toast.success('Restoranınız başarıyla tanımlandı!', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+          });
+
+          navigate('/MenuEdit', { state: { username } });
+
         } else {
           console.error('Dosya yüklenirken bir hata oluştu.');
         }
@@ -85,7 +97,7 @@ const PlaceEditForm = ({ username }) => {
                  type="text"
                  name='restourantName'
                  placeholder="Restoran Adı"
-                value={user.restourantName}
+                value={place.restourantName}
                 onChange={handleInputChange}
                 />
             </InputContainer>
@@ -95,7 +107,7 @@ const PlaceEditForm = ({ username }) => {
               type="text"
               name='placeDefinition'
               placeholder="Restoran Acçıklaması"
-              value={user.placeDefinition}
+              value={place.placeDefinition}
               onChange={handleInputChange}
             />
              </InputContainer>

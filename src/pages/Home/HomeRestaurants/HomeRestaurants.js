@@ -11,7 +11,7 @@ const AmazingMeal = () => {
   const [selectedCategory, setSelectedCategory] = useState('Hepsi');
 
   useEffect(() => {
-    fetch('http://localhost:8081/api/getPlace')
+    fetch('http://localhost:8080/api/getPlace')
       .then(response => response.json())
       .then(data => {
         const sortedPlaces = data.sort((a, b) => a.id - b.id);

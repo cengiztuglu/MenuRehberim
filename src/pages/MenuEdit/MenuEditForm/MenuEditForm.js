@@ -1,48 +1,76 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import "./MenuEditForm.css";
 
 const MenuEditForm = ({username}) => {
-  const [item, setUser] = useState({
+  const [item, setItem] = useState({
     itemName: '',
-    itemDefination: '',
-    itemPicName: '',
+    itemDefinition: '',
     itemPrice: '',
+    itemCategory:''
   
   });
+  const [itemPicName, setItemPicName] = useState(null);
   const [error, setError] = useState(null);
-
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUser({ ...item, [name]: value });
+    setItem({ ...item, [name]: value });
   };
 
-  const handleEditer = (event) => {
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setItemPicName(file);
+  };
+ 
+
+  const handleEditer = async (event) => {
     event.preventDefault();
-   
-      // Kullanıcı kaydı
-      if (item.itemName && item.itemDefination && item.itemPicName&& item.itemPrice ) {
-        setError('');
-        axios.post(`http://localhost:8081/api/menuItemAdd/${username}`, item)
-          .then(response => {
-            if (response.data === true) {
-              console.error("Menü ürün Eklendi");
-              
-              // Başarılı kayıt durumunda başka bir sayfaya yönlendirme yapılabilir.
-            } else {
-              console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
-            }
-          }).catch(error => {
-            console.error("Kullanıcı kaydı sırasında bir hata oluştu.");
+
+    if (itemPicName) {
+      setError('');
+      try {
+        const formData = new FormData();
+        Object.entries(item).forEach(([key, value]) => {
+          formData.append(key, value);
+        });
+        formData.append('file', itemPicName);
+
+        const response = await axios.post(
+          `http://localhost:8080/api/menuItemsAdd/${username}`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          console.error(response.data);
+          toast.success('Ürün başarıyla kaydedildi!', {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 3000, // 3 saniye sonra otomatik olarak kapanır
+            onClose: () => {
+              // Sayfa yenileme işlemi
+              window.location.reload();
+            },
           });
-      } else {
-        setError('Lütfen tüm alanları doldurun.');
+
+          // Başka bir işlem yapılabilir
+        } else {
+          console.error('Dosya yüklenirken bir hata oluştu.');
+        }
+      } catch (error) {
+        console.error('Dosya yüklenirken bir hata oluştu.', error);
       }
+    } else {
+      setError('Lütfen bir dosya seçin.');
+    }
   };
 
   const FormHeader = () => {
@@ -93,23 +121,23 @@ const MenuEditForm = ({username}) => {
             <InputLabel>Urun Açıklama :</InputLabel>
             <Input
               type="text"
-              name='itemDefination'
+              name='itemDefinition'
               placeholder="Urun Açıklaması"
-              value={item.itemDefination}
+              value={item.itemDefinition}
               onChange={handleInputChange}
             />
              </InputContainer>
 
              <InputContainer>
-            <InputLabel>Urun Fotografı :</InputLabel>
-            <Input
-              type="text"
-              name='itemPicName'
-              placeholder="Urun Fotografı"
-              value={item.itemPicName}
-              onChange={handleInputChange}
-            />
-            </InputContainer>
+              <InputLabel>Restoran Profil Fotoğrafı :</InputLabel>
+              <Input
+                type="file"
+                accept=".jpg, .jpeg, .png" 
+                name='itemPicName'
+
+                onChange={handleFileChange}
+              />
+              </InputContainer>
             <InputContainer>
             <InputLabel>Urun Fiyatı :</InputLabel>
             <Input
@@ -120,17 +148,17 @@ const MenuEditForm = ({username}) => {
               onChange={handleInputChange}
             />
             </InputContainer>
-            {/* <InputContainer>
+             <InputContainer>
             <InputLabel>Urun Kategorisi :</InputLabel>
             <Input
-              name='Urun Kategorisi'
+              name='itemCategory'
               type="text"
               placeholder="Urun Kategorisi"
-              value={user.password}
+              value={item.itemCategory}
               onChange={handleInputChange}
             />
             </InputContainer>
-             */}
+             
           </>
         )}
         <Button type='submit'>{ 'Urun Kaydet'}</Button>
