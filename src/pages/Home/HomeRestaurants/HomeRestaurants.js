@@ -1,10 +1,10 @@
-
 import "./HomeRestaurants.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PillsExample from "../FoodCategories/FoodCategories";
 import { BsFillStarFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
 const AmazingMeal = () => {
   const [places, setPlaces] = useState([]);
@@ -28,7 +28,7 @@ const AmazingMeal = () => {
 
   const filteredPlaces = places.filter(place => {
     if (selectedCategory === 'Hepsi') {
-      return true; 
+      return true;
     } else {
       return place.category.toLowerCase() === selectedCategory.toLowerCase();
     }
@@ -42,24 +42,24 @@ const AmazingMeal = () => {
         
         <div className="amazing-card-container">
           {filteredPlaces.map((place, index) => (
-            <div className={`amazing-card amazing-card-${index % 2 === 0 ? 'left' : 'right'}`} key={place.id}>
+            <Link to={`/menu/${place.id}`} key={place.id} className={`amazing-card amazing-card-${index % 2 === 0 ? 'left' : 'right'}`}>
               {/* Restoran içeriği */}
               <div className="amazing-card-content">
                 <div className="amazing-card-title">
                   <BsFillStarFill color="#c3512f" />
-                
                   <h3 className="heading-tertiary">
                     <span>{place.restourantName}</span>
                   </h3>
-                  
                 </div>
-                <img src={`data:image/jpeg;base64,${place.placeBgPicName}`} />
+                <img
+                  src={`data:image/jpeg;base64,${place.placeBgPicName}`}
+                  alt="Place Image"
+                />
                 <p>{place.placeDefinition}</p>
                 <p>{place.placeAdress}</p>
                 <p>{place.category}</p>
-              
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

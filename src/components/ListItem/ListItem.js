@@ -6,8 +6,8 @@ const ListItem = ({title, description, price, itemImage}) => {
     <div className='list-items'>
         <ul>
             <li>
-                {itemImage && <img src={itemImage} alt="hero" />}
-
+                {itemImage && <img src={`data:image/jpeg;base64,${itemImage}`} alt="hero" />}
+                
                 <div>
                     <h3>{title}</h3>
                     {description && <p>{description}</p>}

@@ -1,76 +1,36 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import "./Breakfast.css";
 import ListItem from "../../../components/ListItem/ListItem";
 
-import image1 from "../../../assets/burger.jpg";
-import image2 from "../../../assets/cheese.jpg";
+const Breakfast = ({ id }) => {
+  const [menuData, setMenuData] = useState([]);
+  const { id: routeId } = useParams(); // useParams ile id'yi al
 
-const menuDataLeft = [
-  {
-    title: "Eggs Benedict",
-    description: "with either bacon or salmon",
-    price: "21",
-    img: image1,
-  },
-  {
-    title: "Enfold’s famous Crepes",
-    description: "with fresh fruit, bacon and maple syrup",
-    price: "16",
-    img: image2,
-  },
-  {
-    title: "French Toasted Brioche",
-    description:
-      "with grilled banana, bacon, rosewater mascarpone and maple syrup",
-    price: "17",
-  },
-];
 
-const menuDataRight = [
-  {
-    title: "Low Carb Breakfast",
-    description: "grilled chicken breast with veggies",
-    price: 13,
-  },
-  {
-    title: "Bagel",
-    description: "with salmon, cream cheese and salsa",
-    price: 8.5,
-  },
-  {
-    title: "American Pancakes",
-    description: "with chocolate  sauce or maple syrup, honey and cream",
-    price: 21,
-  },
-];
+  useEffect(() => {
+    fetch(`http://localhost:8080/api/getMenuItemsById/${routeId}`)
+      .then(response => response.json())
+      .then(data => {
+        const sortedMenuData = data.sort((a, b) => a.id - b.id);
+        setMenuData(sortedMenuData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, [id]);
 
-const Breakfast = () => {
   return (
     <div className="container breakfast">
-      <h1 className="heading-secondary">
-        break<span>fast</span>
-      </h1>
-
       <div className="grid-container">
         <div>
-          {menuDataLeft.map((data, i) => (
+          {menuData.map((data, i) => (
             <ListItem
-              title={data.title}
-              description={data.description}
-              price={data.price}
-              itemImage={data.img}
-            />
-          ))}
-        </div>
-
-        <div>
-          {menuDataRight.map((data, i) => (
-            <ListItem
-              title={data.title}
-              description={data.description}
-              price={data.price}
-              itemImage={data.img}
+              key={i}
+              title={data.itemName}
+              description={data.itemDefinition}
+              price={data.itemPrice}
+              itemImage={data.itemPicName}
             />
           ))}
         </div>
