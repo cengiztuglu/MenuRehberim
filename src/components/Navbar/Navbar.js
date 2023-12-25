@@ -53,11 +53,6 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li onClick={handleClick}>
-              <NavLink className="nav-link" to="/about">
-                About
-              </NavLink>
-            </li>
-            <li onClick={handleClick}>
               <NavLink className="nav-link" to="/contact">
                 Contact
               </NavLink>
@@ -72,6 +67,12 @@ const Navbar = () => {
             <li onClick={handleClick}>
               <NavLink className="nav-link" to="/menuedit">
                 Menu Edit
+              </NavLink>
+            </li>
+
+            <li onClick={handleClick}>
+              <NavLink className="nav-link" to="/comment">
+                Yorumlar
               </NavLink>
             </li>
 
